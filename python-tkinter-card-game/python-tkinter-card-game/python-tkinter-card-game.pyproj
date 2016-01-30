@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>2c3bd01d-54f1-46c7-8893-075190cded07</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>python_tkinter_card_game.py</StartupFile>
+    <StartupFile>main (i.e. start here).py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,44 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="python_tkinter_card_game.py" />
+    <Compile Include="app.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="appBase.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CardImage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_game_testingGrounds.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_menu_main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_menu_newgame.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_menu_shared.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_game_template.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="images.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="main %28i.e. start here%29.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Images\Raw\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\back_adorably hideous.gif" />
+    <Content Include="Images\main menu.gif" />
+    <Content Include="Images\Raw\back_adorably hideous.svg" />
+    <Content Include="Images\Raw\main menu.svg" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

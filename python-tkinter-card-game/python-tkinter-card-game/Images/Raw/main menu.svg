@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg5182"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="main menu.svg">
+  <defs
+     id="defs5184" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-38.623136"
+     inkscape:cy="281.43048"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:snap-text-baseline="false"
+     inkscape:window-width="1344"
+     inkscape:window-height="736"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5187">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g5844">
+      <path
+         inkscape:connector-curvature="0"
+         id="rect5835"
+         d="m 0,452.3622 400,0 0,600 -400,0 z"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         transform="translate(582.05718,295.62856)"
+         id="g5838">
+        <path
+           style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m -352.60326,601.60584 -1.48867,155.1278 -29.79822,-148.56571 -33.37389,146.84527 2.26642,-155.10662 -61.99225,124.1885 34.10922,-146.46461 -84.54237,89.37529 62.61317,-123.48564 -98.81689,45.81341 84.98809,-88.41902 -103.41853,-2.233 99.04381,-44.69734 -97.89685,-50.06084 103.40441,3.39964 -82.79233,-92.98836 97.64307,51.16382 -59.58352,-126.81354 82.32376,93.91974 -30.54228,-148.22534 58.94601,127.48214 1.48867,-155.12779 29.79823,148.5657 33.37389,-146.84527 -2.26642,155.10662 61.99224,-124.18849 -34.10922,146.46461 84.54237,-89.37529 -62.61317,123.48563 98.81689,-45.81341 -84.98809,88.41902 103.41853,2.23301 -99.0438,44.69733 97.89684,50.06084 -103.40441,-3.39964 82.79233,92.98837 -97.64307,-51.16383 59.58352,126.81355 -82.32375,-93.91974 30.54228,148.22534 z"
+           id="path5832"
+           inkscape:connector-curvature="0" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:94.94367218px;line-height:100%;font-family:sans-serif;letter-spacing:23.73591805px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           x="-1220.1897"
+           y="182.09584"
+           id="text5730"
+           sodipodi:linespacing="100%"
+           transform="scale(0.43299096,2.309517)"><tspan
+             sodipodi:role="line"
+             id="tspan5732"
+             x="-1220.1897"
+             y="182.09584"
+             style="font-style:normal;font-variant:normal;font-weight:100;font-stretch:normal;font-size:94.94367218px;line-height:100%;font-family:'AR DARLING';-inkscape-font-specification:'AR DARLING, Thin';text-align:start;writing-mode:lr-tb;text-anchor:start">Card Game</tspan><tspan
+             sodipodi:role="line"
+             x="-1220.1897"
+             y="277.03952"
+             id="tspan5734"
+             style="font-style:normal;font-variant:normal;font-weight:100;font-stretch:normal;font-size:94.94367218px;line-height:100%;font-family:'AR DARLING';-inkscape-font-specification:'AR DARLING, Thin';text-align:start;writing-mode:lr-tb;text-anchor:start">WAHHHH!!!</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
