@@ -6,7 +6,7 @@ import gui_menu_main
 import gui_menu_newgame
 #import gui_game_testingGrounds
 #import Opponents
-from images import Images
+from images_app import AppImages
 #from RandomDeckBuilder import GenerateRandomDeck
 
 class app(appBase):
@@ -32,8 +32,7 @@ class app(appBase):
     def _CreateMainWindow(self):
         self.window = Tk()
         self.window.title('Simple Card Game')
-        #self.window.geometry ="800x600+0+0"
-        self.window.minsize(width=800,height=600)
+        self.window.geometry("800x600-30+30")
         self.window.columnconfigure(0,weight=1)
         self.window.rowconfigure(0,weight=1)
 
@@ -43,7 +42,7 @@ class app(appBase):
         self.menuSplitFrame.columnconfigure(1,weight=1) #col1 is where the menu buttons go        
         label = ttk.Label(self.menuSplitFrame)
         label.grid(column=0, row=0,sticky=(N, S, E, W))
-        label['image'] = Images.MainMenu
+        label['image'] = AppImages.MainMenu
 
     def _CreateMenuScreens(self):
         self.screen_mainMenu = gui_menu_main.MainMenu(self)
@@ -51,7 +50,7 @@ class app(appBase):
         #self.screen_playGame = gui_screen_play.PlayScreen(self)
 
     def _InitState(self):
-        Images.LoadImages()
+        AppImages.LoadImages()
         #self.state_PlayerDeck = GenerateRandomDeck()
 
     def _switchScreens(self, newScreen:MenuBase):

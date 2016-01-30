@@ -1,0 +1,8 @@
+<options>
+  <game name="app">
+    <option name="gamemode" value="testing grounds" />
+    <option name="screen" value="800x600+30+30" />
+  </game>
+  <game name="testing grounds">
+  </game>
+</options>

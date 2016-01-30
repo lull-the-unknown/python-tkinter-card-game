@@ -46,20 +46,28 @@
     <Compile Include="gui_game_template.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="images.py">
+    <Compile Include="images_app.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main %28i.e. start here%29.py" />
+    <Compile Include="options.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="options_app.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
     <Folder Include="Images\Raw\" />
+    <Folder Include="saves\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\back_adorably hideous.gif" />
     <Content Include="Images\main menu.gif" />
     <Content Include="Images\Raw\back_adorably hideous.svg" />
     <Content Include="Images\Raw\main menu.svg" />
+    <Content Include="saves\options.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from images import Images
+from images_app import AppImages
 
 
 class CardImage(object):
@@ -15,9 +15,9 @@ class CardImage(object):
         self._card = ttk.Label(self._highlight, borderwidth=3, relief="groove")
         self._card.CardImage = self
         self._card.grid()
-        self.cardFace = Images.Blank
-        self.cardBack = Images.Blank
-        self._card['image'] = Images.Blank
+        self.cardFace = AppImages.Blank
+        self.cardBack = AppImages.Blank
+        self._card['image'] = AppImages.Blank
         self.isShowing = False
         self.currentHighlight = ''
         

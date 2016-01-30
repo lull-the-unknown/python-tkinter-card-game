@@ -3,7 +3,7 @@ from tkinter import ttk
 from appBase import appBase
 #from Decks import *
 #import Cards
-from images import Images
+from images_app import AppImages
 from CardImage import CardImage
 
 class PlayScreen(object):
@@ -21,33 +21,33 @@ class PlayScreen(object):
         for pileIndex in range(5):
             label = ttk.Label(self._frame, borderwidth=border, relief=relief)
             label.grid(column=pileIndex, row=0, padx=pad, pady=pad)
-            label['image'] = Images.Blank
+            label['image'] = AppImages.Blank
             self.cards_Opponent.append(label)
         # Row1: Player's Attacking Slots
         self.cards_PlayerAttack = []
         for pileIndex in range(5):
             label = ttk.Label(self._frame, borderwidth=border, relief=relief)
             label.grid(column=pileIndex, row=1, padx=pad, pady=pad)
-            label['image'] = Images.Blank
+            label['image'] = AppImages.Blank
             self.cards_PlayerAttack.append(label)
             
         # Row1: Opponent's Discard Pile
         self.cards_OpponentDiscard = ttk.Label(self._frame, borderwidth=border, relief=relief)
         self.cards_OpponentDiscard.grid(column=5, row=1, padx=(10+pad,pad), pady=pad)
-        self.cards_OpponentDiscard['image'] = Images.Blank
+        self.cards_OpponentDiscard['image'] = AppImages.Blank
 
         # Row3: Opponent's Attacking Slots
         self.cards_OpponentAttack = []
         for pileIndex in range(5):
             label = ttk.Label(self._frame, borderwidth=border, relief=relief)
             label.grid(column=pileIndex, row=3, padx=pad, pady=pad)
-            label['image'] = Images.Blank
+            label['image'] = AppImages.Blank
             self.cards_OpponentAttack.append(label)
             
         # Row3: Player's Discard Pile
         self.cards_PlayerDiscard = ttk.Label(self._frame, borderwidth=border, relief=relief)
         self.cards_PlayerDiscard.grid(column=5, row=3, padx=(10+pad,pad), pady=pad)
-        self.cards_PlayerDiscard['image'] = Images.Blank
+        self.cards_PlayerDiscard['image'] = AppImages.Blank
 
         # Row4: Player's Deck
         self.cards_Player = []
@@ -69,7 +69,7 @@ class PlayScreen(object):
             #    label.highlight = highlight
             #    label.pileIndex = pileIndex
             #    label.cardIndex = cardIndex
-            #    label['image'] = Images.Blank
+            #    label['image'] = AppImages.Blank
             #    label.bind('<1>', self.OnCardClick)
             #    label.bind('<Enter>', self.OnCardEnter)
             #    label.bind('<Leave>', self.OnCardLeave)
@@ -80,12 +80,12 @@ class PlayScreen(object):
         #self.cards_HighlightedCard.grid(column=6, row=4, padx=pad, pady=pad)
         self.cards_HighlightedCard.grid(column=5, row=4, padx=pad, pady=(4*peek+pad,pad))
         self.cards_HighlightedCard.label = ttk.Label(self.cards_HighlightedCard)
-        self.cards_HighlightedCard.label['image'] = Images.Blank
+        self.cards_HighlightedCard.label['image'] = AppImages.Blank
         self.cards_HighlightedCard.label.grid()
 
         # SneakAPeek Card
         self.cards_SneakAPeek = ttk.Label(self._frame, borderwidth=border, relief=relief)
-        self.cards_SneakAPeek['image'] = Images.Blank
+        self.cards_SneakAPeek['image'] = AppImages.Blank
         self.cards_SneakAPeek.bind('<1>', self.SneakAPeek_Click)
         self.cards_SneakAPeek.bind('<Leave>', lambda e: self.cards_SneakAPeek.grid_forget())
         
@@ -166,7 +166,7 @@ class PlayScreen(object):
         card = e.widget.CardImage
         card.ShowCardBack()
         card.Highlight('')
-        self.cards_HighlightedCard.label['image'] = Images.Blank
+        self.cards_HighlightedCard.label['image'] = AppImages.Blank
         
     def OnCardLeave(self, e):
         label = e.widget
