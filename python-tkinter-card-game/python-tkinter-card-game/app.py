@@ -4,7 +4,6 @@ from appBase import appBase
 from gui_menuBase import MenuBase
 from gui_mainMenu import MainMenu
 from gameBase import *
-from images_app import AppImages
 from options_app import AppOptions
 
 class app(appBase):
@@ -14,6 +13,7 @@ class app(appBase):
         super().__init__()
         self._InitState()
         self._CreateGui()
+        self.LoadGame(self.options.gamemode)
 
     def Run(self):
         self.menuSplitFrame.grid(column=0, row=0,sticky=(N, S, E, W))
@@ -26,12 +26,11 @@ class app(appBase):
 
     def _InitState(self):
         self.options = AppOptions()
-        self.game = GameLoader.LoadGame_ByName(self.options.gamemode)
+        self.game = gameBase()
         self.CurrentScreen = None
 
     def _CreateGui(self):
         self._CreateMainWindow()
-        AppImages.LoadImages()
         self._CreateMenuSplitFrame()
         self._CreateMenuScreens()
         
@@ -46,9 +45,13 @@ class app(appBase):
         self.menuSplitFrame = ttk.Frame(self.window)
         self.menuSplitFrame.columnconfigure(0,weight=0) #col0 is where the image goes
         self.menuSplitFrame.columnconfigure(1,weight=1) #col1 is where the menu buttons go        
-        label = ttk.Label(self.menuSplitFrame)
-        label.grid(column=0, row=0,sticky=(N, S, E, W))
-        label['image'] = AppImages.MainMenu
+        self.menuSplitFrame.imagelabel = ttk.Label(self.menuSplitFrame)
+        self.menuSplitFrame.imagelabel.grid(column=0, row=0,sticky=(N, S, E, W))
+
+    def LoadGame(self, name):
+        self.game.End()
+        self.game = GameLoader.LoadGame_ByName(name)
+        self.menuSplitFrame.imagelabel['image'] = self.game.Images.MainMenu
 
     def _CreateMenuScreens(self):
         self.screen_mainMenu = MainMenu(self)

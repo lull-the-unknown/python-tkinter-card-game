@@ -50,7 +50,10 @@
     <Compile Include="gui_gameTemplate.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="images_app.py">
+    <Compile Include="images_shared.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="images_testingGrounds.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main %28i.e. start here%29.py" />
@@ -66,14 +69,66 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="Images\Raw\" />
+    <Folder Include="Images\oxygen\" />
     <Folder Include="saves\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="credits_testingGrounds.txt" />
     <Content Include="Images\back_adorably hideous.gif" />
-    <Content Include="Images\main menu.gif" />
-    <Content Include="Images\Raw\back_adorably hideous.svg" />
-    <Content Include="Images\Raw\main menu.svg" />
+    <Content Include="Images\main menu_testing grounds.gif" />
+    <Content Include="Images\oxygen\10_club.gif" />
+    <Content Include="Images\oxygen\10_diamond.gif" />
+    <Content Include="Images\oxygen\10_heart.gif" />
+    <Content Include="Images\oxygen\10_spade.gif" />
+    <Content Include="Images\oxygen\1_club.gif" />
+    <Content Include="Images\oxygen\1_diamond.gif" />
+    <Content Include="Images\oxygen\1_heart.gif" />
+    <Content Include="Images\oxygen\1_spade.gif" />
+    <Content Include="Images\oxygen\2_club.gif" />
+    <Content Include="Images\oxygen\2_diamond.gif" />
+    <Content Include="Images\oxygen\2_heart.gif" />
+    <Content Include="Images\oxygen\2_spade.gif" />
+    <Content Include="Images\oxygen\3_club.gif" />
+    <Content Include="Images\oxygen\3_diamond.gif" />
+    <Content Include="Images\oxygen\3_heart.gif" />
+    <Content Include="Images\oxygen\3_spade.gif" />
+    <Content Include="Images\oxygen\4_club.gif" />
+    <Content Include="Images\oxygen\4_diamond.gif" />
+    <Content Include="Images\oxygen\4_heart.gif" />
+    <Content Include="Images\oxygen\4_spade.gif" />
+    <Content Include="Images\oxygen\5_club.gif" />
+    <Content Include="Images\oxygen\5_diamond.gif" />
+    <Content Include="Images\oxygen\5_heart.gif" />
+    <Content Include="Images\oxygen\5_spade.gif" />
+    <Content Include="Images\oxygen\6_club.gif" />
+    <Content Include="Images\oxygen\6_diamond.gif" />
+    <Content Include="Images\oxygen\6_heart.gif" />
+    <Content Include="Images\oxygen\6_spade.gif" />
+    <Content Include="Images\oxygen\7_club.gif" />
+    <Content Include="Images\oxygen\7_diamond.gif" />
+    <Content Include="Images\oxygen\7_heart.gif" />
+    <Content Include="Images\oxygen\7_spade.gif" />
+    <Content Include="Images\oxygen\8_club.gif" />
+    <Content Include="Images\oxygen\8_diamond.gif" />
+    <Content Include="Images\oxygen\8_heart.gif" />
+    <Content Include="Images\oxygen\8_spade.gif" />
+    <Content Include="Images\oxygen\9_club.gif" />
+    <Content Include="Images\oxygen\9_diamond.gif" />
+    <Content Include="Images\oxygen\9_heart.gif" />
+    <Content Include="Images\oxygen\9_spade.gif" />
+    <Content Include="Images\oxygen\back.gif" />
+    <Content Include="Images\oxygen\jack_club.gif" />
+    <Content Include="Images\oxygen\jack_diamond.gif" />
+    <Content Include="Images\oxygen\jack_heart.gif" />
+    <Content Include="Images\oxygen\jack_spade.gif" />
+    <Content Include="Images\oxygen\king_club.gif" />
+    <Content Include="Images\oxygen\king_diamond.gif" />
+    <Content Include="Images\oxygen\king_heart.gif" />
+    <Content Include="Images\oxygen\king_spade.gif" />
+    <Content Include="Images\oxygen\queen_club.gif" />
+    <Content Include="Images\oxygen\queen_diamond.gif" />
+    <Content Include="Images\oxygen\queen_heart.gif" />
+    <Content Include="Images\oxygen\queen_spade.gif" />
     <Content Include="saves\options.xml" />
   </ItemGroup>
   <PropertyGroup>
