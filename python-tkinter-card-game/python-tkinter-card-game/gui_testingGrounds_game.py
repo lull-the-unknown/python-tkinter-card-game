@@ -1,13 +1,47 @@
 from tkinter import *
 from tkinter import ttk
 from appBase import appBase
-#from Decks import *
-#import Cards
-from images_app import AppImages
 from CardImage import CardImage
+import random as rand
 
-class PlayScreen(object):
+class TestingGroundsGameScreen(object):
     """The screen where the actual game is played"""
+
+    def __init__(self, app:appBase):
+        super().__init__()
+        self.app = app
+        self.game = app.game
+        self._CreateGui()
+                
+    def BindKeys(self):
+        self.app.window.bind('<Escape>', lambda e: self.game.StopPlaying())
+    def UnBindKeys(self):
+        self.app.window.unbind('<Escape>')
+    
+    def Show(self):
+        self._frame.grid(column=0, row=0,sticky=(N, S), padx=5,pady=5)
+        self.BindKeys()
+
+    def Hide(self):
+        # To remove a frame from a grid: frame.remove() to remember grid settings or frame.forget() to discard grid settings
+        self.UnBindKeys()
+        self._frame.grid_remove()
+        
+    def _CreateGui(self):
+        self._frame = ttk.Frame(self.app.window)
+        self._frame.columnconfigure(0,weight=0) # pile 1
+        self._frame.columnconfigure(1,weight=0) # pile 2
+        self._frame.columnconfigure(2,weight=0) # pile 3
+        self._frame.columnconfigure(3,weight=0) # pile 4
+        self._frame.columnconfigure(4,weight=0) # pile 5
+        self._frame.columnconfigure(5,weight=0) # discards
+        self._frame.columnconfigure(6,weight=1) # ui / out messages / scores / whatever
+        self._frame.rowconfigure(0,weight=0) # opponent's cards
+        self._frame.rowconfigure(1,weight=0) # your attack
+        self._frame.rowconfigure(2,weight=1) # no man's land
+        self._frame.rowconfigure(3,weight=0) # opponent's attack
+        self._frame.rowconfigure(4,weight=0) # your cards
+        self._CreateCards()
     
     def _CreateCards(self)->[]:
         border = 3
@@ -16,38 +50,39 @@ class PlayScreen(object):
         height = 100 + 3*border
         peek = 20
         pad = 3
+        blankImage = self.game.Images.Blank
         # Row0: Opponent's deck
         self.cards_Opponent = []
         for pileIndex in range(5):
             label = ttk.Label(self._frame, borderwidth=border, relief=relief)
             label.grid(column=pileIndex, row=0, padx=pad, pady=pad)
-            label['image'] = AppImages.Blank
+            label['image'] = blankImage
             self.cards_Opponent.append(label)
         # Row1: Player's Attacking Slots
         self.cards_PlayerAttack = []
         for pileIndex in range(5):
             label = ttk.Label(self._frame, borderwidth=border, relief=relief)
             label.grid(column=pileIndex, row=1, padx=pad, pady=pad)
-            label['image'] = AppImages.Blank
+            label['image'] = blankImage
             self.cards_PlayerAttack.append(label)
             
         # Row1: Opponent's Discard Pile
         self.cards_OpponentDiscard = ttk.Label(self._frame, borderwidth=border, relief=relief)
         self.cards_OpponentDiscard.grid(column=5, row=1, padx=(10+pad,pad), pady=pad)
-        self.cards_OpponentDiscard['image'] = AppImages.Blank
+        self.cards_OpponentDiscard['image'] = blankImage
 
         # Row3: Opponent's Attacking Slots
         self.cards_OpponentAttack = []
         for pileIndex in range(5):
             label = ttk.Label(self._frame, borderwidth=border, relief=relief)
             label.grid(column=pileIndex, row=3, padx=pad, pady=pad)
-            label['image'] = AppImages.Blank
+            label['image'] = blankImage
             self.cards_OpponentAttack.append(label)
             
         # Row3: Player's Discard Pile
         self.cards_PlayerDiscard = ttk.Label(self._frame, borderwidth=border, relief=relief)
         self.cards_PlayerDiscard.grid(column=5, row=3, padx=(10+pad,pad), pady=pad)
-        self.cards_PlayerDiscard['image'] = AppImages.Blank
+        self.cards_PlayerDiscard['image'] = blankImage
 
         # Row4: Player's Deck
         self.cards_Player = []
@@ -69,7 +104,7 @@ class PlayScreen(object):
             #    label.highlight = highlight
             #    label.pileIndex = pileIndex
             #    label.cardIndex = cardIndex
-            #    label['image'] = AppImages.Blank
+            #    label['image'] = blankImage
             #    label.bind('<1>', self.OnCardClick)
             #    label.bind('<Enter>', self.OnCardEnter)
             #    label.bind('<Leave>', self.OnCardLeave)
@@ -80,65 +115,46 @@ class PlayScreen(object):
         #self.cards_HighlightedCard.grid(column=6, row=4, padx=pad, pady=pad)
         self.cards_HighlightedCard.grid(column=5, row=4, padx=pad, pady=(4*peek+pad,pad))
         self.cards_HighlightedCard.label = ttk.Label(self.cards_HighlightedCard)
-        self.cards_HighlightedCard.label['image'] = AppImages.Blank
+        self.cards_HighlightedCard.label['image'] = blankImage
         self.cards_HighlightedCard.label.grid()
 
         # SneakAPeek Card
         self.cards_SneakAPeek = ttk.Label(self._frame, borderwidth=border, relief=relief)
-        self.cards_SneakAPeek['image'] = AppImages.Blank
+        self.cards_SneakAPeek['image'] = blankImage
         self.cards_SneakAPeek.bind('<1>', self.SneakAPeek_Click)
         self.cards_SneakAPeek.bind('<Leave>', lambda e: self.cards_SneakAPeek.grid_forget())
-        
-    def _CreateGui(self, gameApp:appBase):
-        self._frame = ttk.Frame(gameApp.window)
-        self._frame.columnconfigure(0,weight=0) # pile 1
-        self._frame.columnconfigure(1,weight=0) # pile 2
-        self._frame.columnconfigure(2,weight=0) # pile 3
-        self._frame.columnconfigure(3,weight=0) # pile 4
-        self._frame.columnconfigure(4,weight=0) # pile 5
-        self._frame.columnconfigure(5,weight=0) # discards
-        self._frame.columnconfigure(6,weight=1) # ui
-        self._frame.rowconfigure(0,weight=0) # opponent's cards
-        self._frame.rowconfigure(1,weight=0) # your attack
-        self._frame.rowconfigure(2,weight=1) # no man's land
-        self._frame.rowconfigure(3,weight=0) # opponent's attack
-        self._frame.rowconfigure(4,weight=0) # your cards
-        self._CreateCards()
 
-    def DrawCards(self, opponent:Deck, player:Deck):
-        self.deckOpponent = opponent
-        self.deckPlayer = player
+    def DrawCards(self): #, opponent:Deck, player:Deck):
+        #self.deckOpponent = opponent
+        self.deckPlayer = self.game.Images.GetRandomDeck()
+        #for pileIndex in range(5):
+        #    self.cards_Opponent[pileIndex].BackImage = opponent.BackImage
+        #    self.cards_Opponent[pileIndex]['image'] = opponent.BackImage
+        #    pile = self.cards_Player[pileIndex]
+        #    for cardIndex in range(5):
+        #        pile[cardIndex].cardBack = player.BackImage
+        #        pile[cardIndex].cardFace = player.Piles[pileIndex].PeekAt(cardIndex).FaceImage
+        #        pile[cardIndex].ShowCardBack()
+        #        #pile[cardIndex].BackImage = player.BackImage
+        #        #pile[cardIndex].FaceImage = player.Piles[pileIndex].PeekAt(cardIndex).FaceImage
+        #        #pile[cardIndex]['image'] = player.BackImage
+        #self.cards_OpponentDiscard['image'] = opponent.BackImage
+        #self.cards_PlayerDiscard['image'] = player.BackImage
+        opponentBack = self.game.Images.GetRandomBack()
+        playerBack = self.game.Images.GetRandomBack()
         for pileIndex in range(5):
-            self.cards_Opponent[pileIndex].BackImage = opponent.BackImage
-            self.cards_Opponent[pileIndex]['image'] = opponent.BackImage
+            self.cards_Opponent[pileIndex].BackImage = opponentBack
+            self.cards_Opponent[pileIndex]['image'] = opponentBack
             pile = self.cards_Player[pileIndex]
             for cardIndex in range(5):
-                pile[cardIndex].cardBack = player.BackImage
-                pile[cardIndex].cardFace = player.Piles[pileIndex].PeekAt(cardIndex).FaceImage
+                pile[cardIndex].cardBack = playerBack
+                pile[cardIndex].cardFace = self.deckPlayer.GetRandomFaceCard()
                 pile[cardIndex].ShowCardBack()
                 #pile[cardIndex].BackImage = player.BackImage
                 #pile[cardIndex].FaceImage = player.Piles[pileIndex].PeekAt(cardIndex).FaceImage
                 #pile[cardIndex]['image'] = player.BackImage
-        self.cards_OpponentDiscard['image'] = opponent.BackImage
-        self.cards_PlayerDiscard['image'] = player.BackImage
-                
-    def BindKeys(self, gameApp:appBase):
-        gameApp.window.bind('<Escape>', lambda e: gameApp.NewGame())
-    def UnBindKeys(self, gameApp:appBase):
-        gameApp.window.bind('<Escape>', None)
-
-    def __init__(self, gameApp:appBase):
-        super().__init__()
-        self._CreateGui(gameApp)
-    
-    def Show(self, gameApp:appBase):
-        self._frame.grid(column=0, row=0,sticky=(N, S), padx=5,pady=5)
-        self.BindKeys(gameApp)
-
-    def Hide(self, gameApp:appBase):
-        # To remove a frame from a grid: frame.remove() to remember grid settings or frame.forget() to discard grid settings
-        self.UnBindKeys(gameApp)
-        self._frame.grid_remove()
+        self.cards_OpponentDiscard['image'] = opponentBack
+        self.cards_PlayerDiscard['image'] = playerBack
         
     def OnCardEnter(self, e):
         label = e.widget
@@ -159,14 +175,14 @@ class PlayScreen(object):
         card = e.widget.CardImage
         card.ShowCardFace()
         self.cards_HighlightedCard.label['image'] = card.cardFace
-        card.Highlight('green')
+        card.Highlight(rand.choice(['lime','blue','red']))
         
     def OnCardLeave1(self, e):
         #card = CardImage() #intellisense
         card = e.widget.CardImage
         card.ShowCardBack()
         card.Highlight('')
-        self.cards_HighlightedCard.label['image'] = AppImages.Blank
+        self.cards_HighlightedCard.label['image'] = self.game.Images.Blank
         
     def OnCardLeave(self, e):
         label = e.widget
@@ -196,9 +212,9 @@ class PlayScreen(object):
     def SneakAPeek(self, label):
         gridInfo = label.master.grid_info()
         self.cards_SneakAPeek.grid(column=gridInfo['column'], row=gridInfo['row'], padx=gridInfo['padx'], pady=gridInfo['pady'])
-        self.cards_SneakAPeek['image'] = label.FaceImage
+        self.cards_SneakAPeek['image'] = label.CardImage.cardFace
         self.cards_SneakAPeek.viewing = label
 
     def SneakAPeek_Click(self, e):
-        self.cards_SneakAPeek.viewing['image'] = self.cards_SneakAPeek.viewing.FaceImage
+        self.cards_SneakAPeek.viewing['image'] = self.cards_SneakAPeek.viewing.cardFace
         self.cards_SneakAPeek.grid_forget()
