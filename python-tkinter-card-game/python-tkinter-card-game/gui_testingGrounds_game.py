@@ -212,9 +212,9 @@ class TestingGroundsGameScreen(object):
     def SneakAPeek(self, label):
         gridInfo = label.master.grid_info()
         self.cards_SneakAPeek.grid(column=gridInfo['column'], row=gridInfo['row'], padx=gridInfo['padx'], pady=gridInfo['pady'])
-        self.cards_SneakAPeek['image'] = label.FaceImage
+        self.cards_SneakAPeek['image'] = label.CardImage.cardFace
         self.cards_SneakAPeek.viewing = label
 
     def SneakAPeek_Click(self, e):
-        self.cards_SneakAPeek.viewing['image'] = self.cards_SneakAPeek.viewing.FaceImage
+        self.cards_SneakAPeek.viewing['image'] = self.cards_SneakAPeek.viewing.cardFace
         self.cards_SneakAPeek.grid_forget()
