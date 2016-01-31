@@ -89,8 +89,8 @@ class PlayScreen(object):
         self.cards_SneakAPeek.bind('<1>', self.SneakAPeek_Click)
         self.cards_SneakAPeek.bind('<Leave>', lambda e: self.cards_SneakAPeek.grid_forget())
         
-    def _CreateGui(self, app:appBase):
-        self._frame = ttk.Frame(app.window)
+    def _CreateGui(self, gameApp:appBase):
+        self._frame = ttk.Frame(gameApp.window)
         self._frame.columnconfigure(0,weight=0) # pile 1
         self._frame.columnconfigure(1,weight=0) # pile 2
         self._frame.columnconfigure(2,weight=0) # pile 3
@@ -122,22 +122,22 @@ class PlayScreen(object):
         self.cards_OpponentDiscard['image'] = opponent.BackImage
         self.cards_PlayerDiscard['image'] = player.BackImage
                 
-    def BindKeys(self, app:appBase):
-        app.window.bind('<Escape>', lambda e: app.NewGame())
-    def UnBindKeys(self, app:appBase):
-        app.window.bind('<Escape>', None)
+    def BindKeys(self, gameApp:appBase):
+        gameApp.window.bind('<Escape>', lambda e: gameApp.NewGame())
+    def UnBindKeys(self, gameApp:appBase):
+        gameApp.window.bind('<Escape>', None)
 
-    def __init__(self, app:appBase):
+    def __init__(self, gameApp:appBase):
         super().__init__()
-        self._CreateGui(app)
+        self._CreateGui(gameApp)
     
-    def Show(self, app:appBase):
+    def Show(self, gameApp:appBase):
         self._frame.grid(column=0, row=0,sticky=(N, S), padx=5,pady=5)
-        self.BindKeys(app)
+        self.BindKeys(gameApp)
 
-    def Hide(self, app:appBase):
+    def Hide(self, gameApp:appBase):
         # To remove a frame from a grid: frame.remove() to remember grid settings or frame.forget() to discard grid settings
-        self.UnBindKeys(app)
+        self.UnBindKeys(gameApp)
         self._frame.grid_remove()
         
     def OnCardEnter(self, e):

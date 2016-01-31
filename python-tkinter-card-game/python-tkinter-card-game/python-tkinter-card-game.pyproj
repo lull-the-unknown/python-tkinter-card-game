@@ -25,25 +25,29 @@
     <Compile Include="app.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="appBase.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="appBase.py" />
     <Compile Include="CardImage.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gui_game_testingGrounds.py">
+    <Compile Include="gameBase.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gui_menu_main.py">
+    <Compile Include="game_testingGrounds.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gui_menu_newgame.py">
+    <Compile Include="gui_testingGrounds_game.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gui_menu_shared.py">
+    <Compile Include="gui_mainMenu.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gui_game_template.py">
+    <Compile Include="gui_testingGrounds_menu_newgame.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_menuBase.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="gui_gameTemplate.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="images_app.py">
@@ -54,6 +58,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="options_app.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="options_testingGrounds.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

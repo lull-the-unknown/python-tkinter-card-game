@@ -1,38 +1,44 @@
 from tkinter import *
 from tkinter import ttk
 from appBase import appBase
-from gui_menu_shared import MenuBase
-import gui_menu_main
-import gui_menu_newgame
-#import gui_game_testingGrounds
-#import Opponents
+from gui_menuBase import MenuBase
+from gui_mainMenu import MainMenu
+from gameBase import *
 from images_app import AppImages
-#from RandomDeckBuilder import GenerateRandomDeck
+from options_app import AppOptions
 
 class app(appBase):
     """The app (i.e. Master Control)"""
 
     def __init__(self):
         super().__init__()
-        self._CreateMainWindow()
         self._InitState()
-        self._CreateMenuSplitFrame()
-        self._CreateMenuScreens()
-        self.CurrentScreen = None
+        self._CreateGui()
 
     def Run(self):
         self.menuSplitFrame.grid(column=0, row=0,sticky=(N, S, E, W))
         self.CurrentScreen = self.screen_mainMenu
-        self.CurrentScreen.Show(self)
+        self.CurrentScreen.Show()
         self.window.mainloop()
 
     def Quit(self):
         self.window.destroy()
 
+    def _InitState(self):
+        self.options = AppOptions()
+        self.game = GameLoader.LoadGame_ByName(self.options.gamemode)
+        self.CurrentScreen = None
+
+    def _CreateGui(self):
+        self._CreateMainWindow()
+        AppImages.LoadImages()
+        self._CreateMenuSplitFrame()
+        self._CreateMenuScreens()
+        
     def _CreateMainWindow(self):
         self.window = Tk()
         self.window.title('Simple Card Game')
-        self.window.geometry("800x600-30+30")
+        self.window.geometry(self.options.screen)
         self.window.columnconfigure(0,weight=1)
         self.window.rowconfigure(0,weight=1)
 
@@ -45,36 +51,50 @@ class app(appBase):
         label['image'] = AppImages.MainMenu
 
     def _CreateMenuScreens(self):
-        self.screen_mainMenu = gui_menu_main.MainMenu(self)
-        self.screen_newGameMenu = gui_menu_newgame.NewGameMenu(self)
-        #self.screen_playGame = gui_screen_play.PlayScreen(self)
-
-    def _InitState(self):
-        AppImages.LoadImages()
-        #self.state_PlayerDeck = GenerateRandomDeck()
+        self.screen_mainMenu = MainMenu(self)
+        self.screen_changeGameMenu = None
+        
+        #load new game menu, if available
+        if self.game.menuclass_newgame != None:
+            self.screen_newGameMenu = self.game.menuclass_newgame(self)
+        else:
+            self.screen_mainMenu.DisableButton('newgame')
+        
+        #load options menu, if available
+        if self.game.menuclass_options != None:
+            self.screen_optionsMenu = self.game.menuclass_options(self)
+        else:
+            self.screen_mainMenu.DisableButton('options')
+        
+        #load achievements menu, if available
+        if self.game.menuclass_achievements != None:
+            self.screen_achievementsMenu = self.game.menuclass_achievements(self)
+        else:
+            self.screen_mainMenu.DisableButton('achievements')
+        
+        #load credits menu, if available
+        if self.game.menuclass_credits != None:
+            self.screen_creditsMenu = self.game.menuclass_credits(self)
+        else:
+            self.screen_mainMenu.DisableButton('credits')
 
     def _switchScreens(self, newScreen:MenuBase):
-        #self.CurrentScreen.Hide(self)
+        self.CurrentScreen.Hide()
+        newScreen.Show()
         self.CurrentScreen = newScreen
-        self.window.after(200,lambda:self.CurrentScreen.Show(self))
 
     def ShowSplitMenu(self):
-        self.CurrentScreen.Hide(self)
         self.menuSplitFrame.grid(column=0, row=0,sticky=(N, S, E, W))
     def HideSplitMenu(self):
-        self.CurrentScreen.Hide(self)
         self.menuSplitFrame.grid_remove()
         
     def MainMenu(self):
-        self.ShowSplitMenu()
         self._switchScreens(self.screen_mainMenu)
     def NewGame(self):
-        self.ShowSplitMenu()
         self._switchScreens(self.screen_newGameMenu)
     def PlayGame(self):
         screen = self.screen_playGame
-        self.HideSplitMenu()
         self._switchScreens(screen)
-        self.state_Opponent.GameStart(self)
-        playerDeck = self.state_PlayerDeck.Clone()
         screen.DrawCards(self.state_Opponent.Deck, playerDeck)
+    def ChangeGame(self):
+        pass

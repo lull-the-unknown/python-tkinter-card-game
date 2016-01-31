@@ -5,11 +5,24 @@ class GameOptions(object):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.name = ""
         # subclass template:
         #loader = OptionsLoader()
         #loader.LoadOptions_FromXML("gameName")
         #self.optionName = loader.GetValueOrDefault(name='optionName',default='default value if no option found by that name')
         #self.otherOptionName = loader.GetValueOrDefault(name='otherOptionName',default='default value if no option found by that name')
+    def Load(self):
+        pass
+    def ToDict(self)->dict:
+        results = dict()
+        # subclass template:
+        #results = super().ToDict()
+        #results['optionName'] = self.optionName
+        #results['otherOptionName'] = self.otherOptionName
+        return results
+    
+    def Save(self):
+        OptionsLoader.SaveOptions_ToXml(self.name, self.ToDict())
         
 
 class OptionsLoader(object):
@@ -32,7 +45,7 @@ class OptionsLoader(object):
     def LoadOptions_FromXML(self, name:str):
         self.gameName = name
         self.options = dict()
-        xmlTree = ET.parse(filepath)
+        xmlTree = ET.parse(OptionsLoader.filepath)
         xmlRoot = xmlTree.getroot()
         gameNodes = xmlRoot.findall("game")
         for game in gameNodes:
@@ -40,10 +53,10 @@ class OptionsLoader(object):
                 continue
             optionNodes = game.findall('option')
             for option in optionNodes:
-                self.options[option.get(name).lower()] = option.get(value)
+                self.options[option.get('name').lower()] = option.get('value')
 
     def SaveOptions_ToXml(name:str, optionsToSave:dict):
-        xmlTree = ET.parse(filepath)
+        xmlTree = ET.parse(OptionsLoader.filepath)
         xmlRoot = xmlTree.getroot()
         xmlGameNodes = xmlRoot.findall("game")
         xmlGame = None
@@ -62,4 +75,4 @@ class OptionsLoader(object):
             xmlOption.set('name', optName.lower())
             xmlOption.set('value', optionsToSave[optName])
 
-        tree.write(filepath)
+        tree.write(OptionsLoader.filepath)
