@@ -1,13 +1,12 @@
 from tkinter import *
 from tkinter import ttk
-from images_app import AppImages
-
 
 class CardImage(object):
     """The element representing a card on the screen"""
 
     def __init__(self, parentFrame:Frame, gridCol:int, gridRow:int):
         super().__init__()
+        self.BlankImage = PhotoImage(width=70,height=100)
         self.gridCol = gridCol
         self.gridRow = gridRow
         self.index = 0
@@ -15,9 +14,9 @@ class CardImage(object):
         self._card = ttk.Label(self._highlight, borderwidth=3, relief="groove")
         self._card.CardImage = self
         self._card.grid()
-        self.cardFace = AppImages.Blank
-        self.cardBack = AppImages.Blank
-        self._card['image'] = AppImages.Blank
+        self.cardFace = self.BlankImage
+        self.cardBack = self.BlankImage
+        self._card['image'] = self.BlankImage
         self.isShowing = False
         self.currentHighlight = ''
         

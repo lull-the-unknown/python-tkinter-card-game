@@ -47,10 +47,7 @@
     <Compile Include="gui_menuBase.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gui_gameTemplate.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="images_shared.py">
+    <Compile Include="ImageDeck.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="images_testingGrounds.py">

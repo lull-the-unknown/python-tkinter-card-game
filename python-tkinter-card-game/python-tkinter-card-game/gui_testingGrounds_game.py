@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from appBase import appBase
 from CardImage import CardImage
+import random as rand
 
 class TestingGroundsGameScreen(object):
     """The screen where the actual game is played"""
@@ -11,6 +12,20 @@ class TestingGroundsGameScreen(object):
         self.app = app
         self.game = app.game
         self._CreateGui()
+                
+    def BindKeys(self):
+        self.app.window.bind('<Escape>', lambda e: self.game.StopPlaying())
+    def UnBindKeys(self):
+        self.app.window.unbind('<Escape>')
+    
+    def Show(self):
+        self._frame.grid(column=0, row=0,sticky=(N, S), padx=5,pady=5)
+        self.BindKeys()
+
+    def Hide(self):
+        # To remove a frame from a grid: frame.remove() to remember grid settings or frame.forget() to discard grid settings
+        self.UnBindKeys()
+        self._frame.grid_remove()
         
     def _CreateGui(self):
         self._frame = ttk.Frame(self.app.window)
@@ -109,9 +124,9 @@ class TestingGroundsGameScreen(object):
         self.cards_SneakAPeek.bind('<1>', self.SneakAPeek_Click)
         self.cards_SneakAPeek.bind('<Leave>', lambda e: self.cards_SneakAPeek.grid_forget())
 
-    def DrawCards(self) #, opponent:Deck, player:Deck):
+    def DrawCards(self): #, opponent:Deck, player:Deck):
         #self.deckOpponent = opponent
-        #self.deckPlayer = player
+        self.deckPlayer = self.game.Images.GetRandomDeck()
         #for pileIndex in range(5):
         #    self.cards_Opponent[pileIndex].BackImage = opponent.BackImage
         #    self.cards_Opponent[pileIndex]['image'] = opponent.BackImage
@@ -127,34 +142,19 @@ class TestingGroundsGameScreen(object):
         #self.cards_PlayerDiscard['image'] = player.BackImage
         opponentBack = self.game.Images.GetRandomBack()
         playerBack = self.game.Images.GetRandomBack()
-        playerFace = 
         for pileIndex in range(5):
             self.cards_Opponent[pileIndex].BackImage = opponentBack
             self.cards_Opponent[pileIndex]['image'] = opponentBack
             pile = self.cards_Player[pileIndex]
             for cardIndex in range(5):
                 pile[cardIndex].cardBack = playerBack
-                pile[cardIndex].cardFace = player.Piles[pileIndex].PeekAt(cardIndex).FaceImage
+                pile[cardIndex].cardFace = self.deckPlayer.GetRandomFaceCard()
                 pile[cardIndex].ShowCardBack()
                 #pile[cardIndex].BackImage = player.BackImage
                 #pile[cardIndex].FaceImage = player.Piles[pileIndex].PeekAt(cardIndex).FaceImage
                 #pile[cardIndex]['image'] = player.BackImage
-        self.cards_OpponentDiscard['image'] = opponent.BackImage
-        self.cards_PlayerDiscard['image'] = player.BackImage
-                
-    def BindKeys(self, gameApp:appBase):
-        gameApp.window.bind('<Escape>', lambda e: gameApp.NewGame())
-    def UnBindKeys(self, gameApp:appBase):
-        gameApp.window.bind('<Escape>', None)
-    
-    def Show(self, gameApp:appBase):
-        self._frame.grid(column=0, row=0,sticky=(N, S), padx=5,pady=5)
-        self.BindKeys(gameApp)
-
-    def Hide(self, gameApp:appBase):
-        # To remove a frame from a grid: frame.remove() to remember grid settings or frame.forget() to discard grid settings
-        self.UnBindKeys(gameApp)
-        self._frame.grid_remove()
+        self.cards_OpponentDiscard['image'] = opponentBack
+        self.cards_PlayerDiscard['image'] = playerBack
         
     def OnCardEnter(self, e):
         label = e.widget
@@ -175,7 +175,7 @@ class TestingGroundsGameScreen(object):
         card = e.widget.CardImage
         card.ShowCardFace()
         self.cards_HighlightedCard.label['image'] = card.cardFace
-        card.Highlight('green')
+        card.Highlight(rand.choice(['lime','blue','red']))
         
     def OnCardLeave1(self, e):
         #card = CardImage() #intellisense

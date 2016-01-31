@@ -26,13 +26,13 @@ class app(appBase):
 
     def _InitState(self):
         self.options = AppOptions()
-        self.game = gameBase()
+        self.game = gameBase(self)
         self.CurrentScreen = None
 
     def _CreateGui(self):
         self._CreateMainWindow()
         self._CreateMenuSplitFrame()
-        self._CreateMenuScreens()
+        self.screen_changeGameMenu = None
         
     def _CreateMainWindow(self):
         self.window = Tk()
@@ -49,39 +49,12 @@ class app(appBase):
         self.menuSplitFrame.imagelabel.grid(column=0, row=0,sticky=(N, S, E, W))
 
     def LoadGame(self, name):
-        self.game.End()
-        self.game = GameLoader.LoadGame_ByName(name)
-        self.menuSplitFrame.imagelabel['image'] = self.game.Images.MainMenu
-
-    def _CreateMenuScreens(self):
+        self.game.QuitGame()
+        self.game = GameLoader.LoadGame_ByName(name, self)
         self.screen_mainMenu = MainMenu(self)
-        self.screen_changeGameMenu = None
-        
-        #load new game menu, if available
-        if self.game.menuclass_newgame != None:
-            self.screen_newGameMenu = self.game.menuclass_newgame(self)
-        else:
-            self.screen_mainMenu.DisableButton('newgame')
-        
-        #load options menu, if available
-        if self.game.menuclass_options != None:
-            self.screen_optionsMenu = self.game.menuclass_options(self)
-        else:
-            self.screen_mainMenu.DisableButton('options')
-        
-        #load achievements menu, if available
-        if self.game.menuclass_achievements != None:
-            self.screen_achievementsMenu = self.game.menuclass_achievements(self)
-        else:
-            self.screen_mainMenu.DisableButton('achievements')
-        
-        #load credits menu, if available
-        if self.game.menuclass_credits != None:
-            self.screen_creditsMenu = self.game.menuclass_credits(self)
-        else:
-            self.screen_mainMenu.DisableButton('credits')
-
-    def _switchScreens(self, newScreen:MenuBase):
+        self.menuSplitFrame.imagelabel['image'] = self.game.Images.MainMenu
+                
+    def SwitchScreens(self, newScreen:MenuBase):
         self.CurrentScreen.Hide()
         newScreen.Show()
         self.CurrentScreen = newScreen
@@ -92,12 +65,6 @@ class app(appBase):
         self.menuSplitFrame.grid_remove()
         
     def MainMenu(self):
-        self._switchScreens(self.screen_mainMenu)
-    def NewGame(self):
-        self._switchScreens(self.screen_newGameMenu)
-    def PlayGame(self):
-        screen = self.screen_playGame
-        self._switchScreens(screen)
-        screen.DrawCards(self.state_Opponent.Deck, playerDeck)
+        self.SwitchScreens(self.screen_mainMenu)
     def ChangeGame(self):
         pass

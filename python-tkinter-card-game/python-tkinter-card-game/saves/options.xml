@@ -1,7 +1,7 @@
 <options>
   <game name="app">
     <option name="gamemode" value="Testing Grounds" />
-    <option name="screen" value="800x600+30+30" />
+    <option name="screen" value="800x600-30+30" />
   </game>
   <game name="Testing Grounds">
   </game>

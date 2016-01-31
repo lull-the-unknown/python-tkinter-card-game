@@ -1,13 +1,15 @@
 from tkinter import *
 from tkinter import ttk
 from appBase import appBase
+from gameBase import gameBase
 from gui_menuBase import MenuBase
 
-class NewGameMenu(MenuBase):
+class TestingGroundsNewGameMenu(MenuBase):
     """The tk frame containing the new game menu"""
 
-    def __init__(self, gameApp:appBase):
-        super().__init__(gameApp)
+    def __init__(self, app:appBase, game:gameBase):
+        super().__init__(app)
+        self.game = game
         self._CreateGui()
     
     def _CreateGui(self):
@@ -21,8 +23,7 @@ class NewGameMenu(MenuBase):
         self._frame.rowconfigure(5,weight=1) #row5 = [Back]
         
         ttk.Label(self._frame, text="New Game", padding='5 5 5 5', anchor="center").grid(row=0, column=0, sticky=(N, S, E, W), pady=5, padx=5)
-        self._btnStart = self._CreateMenuButton( row=1, text='Start', command=self.app.PlayGame )
-        self._btnStart.state(['disabled'])
+        self._btnStart = self._CreateMenuButton( row=1, text='Start', command=self.game.StartPlaying )
         self._btnSelectOpponent = self._CreateMenuButton( row=2, text='Select Opponent' )
         self._btnSelectOpponent.state(['disabled'])
         self._btnSelectDeck = self._CreateMenuButton( row=3, text='Deck Setup' )
@@ -31,10 +32,10 @@ class NewGameMenu(MenuBase):
         
     def BindKeys(self):
         self.app.window.bind('<Escape>', lambda e: self.app.MainMenu())
-        #self.app.window.bind('<Return>', lambda e: gameApp.PlayGame())
+        self.app.window.bind('<Return>', lambda e: self.game.StartPlaying())
     def UnBindKeys(self):
-        self.app.window.bind('<Escape>', None)
-        self.app.window.bind('<Return>', None)
+        self.app.window.unbind('<Escape>')
+        self.app.window.unbind('<Return>')
 
     def Show(self):
         self.app.ShowSplitMenu()
